@@ -1,9 +1,9 @@
 <template>
   <button @click="send('TOGGLE')">
     {{
-      state.value === 'inactive'
-        ? 'Click to activate'
-        : 'Active! Click to deactivate'
+      state.value === 'paused'
+        ? 'Paused'
+        : 'Playing'
     }}
   </button>
 </template>
@@ -14,13 +14,13 @@ import { Machine } from 'xstate'
 
 const toggleMachine = Machine({
   id: 'toggle',
-  initial: 'inactive',
+  initial: 'paused',
   states: {
-    inactive: {
-      on: { TOGGLE: 'active' },
+    paused: {
+      on: { TOGGLE: 'playing' },
     },
-    active: {
-      on: { TOGGLE: 'inactive' },
+    playing: {
+      on: { TOGGLE: 'paused' },
     },
   },
 })
