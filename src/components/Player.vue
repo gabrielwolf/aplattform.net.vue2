@@ -1,24 +1,21 @@
 <template>
-  <button @click="send('TOGGLE')">
-    {{
-      state.value === 'paused'
-        ? 'Paused'
-        : 'Playing'
-    }}
+  <button @click="toggle">
+    {{ isPlaying ? 'Pause' : 'Play' }}
   </button>
 </template>
 
 <script>
-import { useMachine } from '@xstate/vue'
-import toggleMachine from '@/FSM/toggleMachine'
+import { mapGetters } from 'vuex'
 
 export default {
-  setup() {
-    const { state, send } = useMachine(toggleMachine)
-    return {
-      state,
-      send,
-    }
+  computed: {
+    ...mapGetters('player', ['isPlaying']),
+  },
+  methods: {
+    toggle() {
+      this.$store.commit('player/toggle')
+    },
   },
 }
+
 </script>
