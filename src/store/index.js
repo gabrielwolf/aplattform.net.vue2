@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import player from './player'
+import player from '@/store/player'
 
 Vue.use(Vuex)
 
