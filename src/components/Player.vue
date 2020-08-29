@@ -1,5 +1,5 @@
 <template>
-  <button @click="toggle">
+  <button @click="fetchTrackMeta">
     {{ isPlaying ? 'Pause' : 'Play' }}
   </button>
 </template>
@@ -12,8 +12,8 @@ export default {
     ...mapGetters('player', ['isPlaying']),
   },
   methods: {
-    toggle() {
-      this.$store.commit('player/toggle')
+    fetchTrackMeta() {
+      this.$store.commit('player/init')
     },
   },
 }
