@@ -1,7 +1,9 @@
 import { assign, interpret, Machine } from 'xstate'
 
-// const fetchTrackMeta = (trackId) => fetch(`url/to/track/${trackId}`)
-//   .then((response) => response.json())
+const fetchTrackMeta = () => fetch('http://127.0.0.1:5000/')
+  .then((response) => response.json())
+  .then((json) => console.log(json))
+// .then((json) => json.data.children.map((child) => child.data))
 
 const ambisonicsMachine = Machine({
   id: 'ambisonicsPlayer',
@@ -30,8 +32,9 @@ const ambisonicsMachine = Machine({
       },
     },
     loading: {
-      entry: 'showSpinner',
-      exit: 'hideSpinner',
+      // entry: 'showSpinner',
+      // exit: 'hideSpinner',
+      entry: fetchTrackMeta,
       on: {
         REJECT: 'failure',
         RESOLVE: 'trackMetaLoaded',
